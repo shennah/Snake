@@ -36,7 +36,7 @@ var snakeGame = function(){
 
 	var drawFood = function() {
 		// loop through foodBits // for loop
-			for(var i = 0; i < foodBits.length; i++) {
+		for(var i = 0; i < foodBits.length; i++) {
 			var f = foodBits[i];
 			ctx.fillStyle = "red"; // Snake fill colour
 			ctx.fillRect(f.x*cw, f.y*cw, cw, cw);
@@ -46,6 +46,10 @@ var snakeGame = function(){
 	}
 
 	// function food collision
+
+		////////////////////////
+
+
 	// loop to check for food and head collision
 		// another function to eat // remove food // call makeFood
 
@@ -122,10 +126,7 @@ var snakeGame = function(){
 		tail.y = head_y;
 		snake.unshift(tail); // Puts tail cell at the head of the snake
 
-
-
-
-
+		checkFoodCollision();
 
 		for(var i = 0; i < snake.length; i++) {
 			var s = snake[i];
@@ -137,9 +138,9 @@ var snakeGame = function(){
 
 		drawFood()
 
+
+
 	////////////////////////////////////
-
-
 
 	// grow snake function
 
@@ -157,19 +158,50 @@ var snakeGame = function(){
 		else if ((key === 40) && (dir != "up")) dir = "down";
 	})
 
-
-		
+	
 
 	}
 
-initSnake()
-// drawSnake()
-makeFood()
-// drawFood()
 
-game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
+	// Food Collision
 
-}
+	var checkFoodCollision = function() {
+
+		var head_x = snake[0].x;
+		var head_y = snake[0].y;
+
+		for(var i = 0; i < foodBits.length; i++) {
+			var f = foodBits[i];
+			if (head_x == f.x && head_y == f.y) {
+				console.log("eating")
+				var tail = {
+					x: head_x,
+					y: head_y
+				}
+				makeFood();
+			}
+
+			else {
+				for(var j = 1; j < snake.length; j++) {
+				var s = snake[j];
+					if(head_x == s.x && head_y == s.y) {
+						console.log("Game Over")					
+					}
+				}
+			}	
+		}
+
+	}
+
+	initSnake()
+	// drawSnake()
+	makeFood()
+	// drawFood()
+
+	game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
+
+
+} // snakeGame()
 
 
 
