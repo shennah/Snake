@@ -14,8 +14,7 @@ var snakeGame = function(){
 
 
 	var cw = 15; // Cell width
-	var dir; // default starting direction
-	var food;
+	var dir = "right"// default starting direction
 
 
 	var snake; // Array to render snake
@@ -47,15 +46,6 @@ var snakeGame = function(){
 	}
 
 
-	// Food 
-	var createFood = function() {
-		food = {
-			x: Math.random() * (w - cw) / cw, // spawns food in length/width of canvas minus 1 cw
-			y: Math.random() * (w - cw) / cw
-		};
-		console.log(food)
-	}
-
 
 	// Draws the snake
 	var drawSnake = function(){
@@ -81,19 +71,6 @@ var snakeGame = function(){
 		else if (dir == "up") head_y--;
 		else if (dir == "down") head_y++;
 
-
-
-		var tail = snake.pop(); // pops(removes) tail cell
-		tail.x = head_x;
-		tail.y = head_y;
-		snake.unshift(tail); // Puts tail cell at the head of the snake
-
-
-		// Telporting walls num test
-		if(head_x >= 1000/cw || head_x <= -1 || head_y >= 600/cw || head_y <= -1) {
-			console.log(head_y);
-		}
-
 		//Teleporting walls
 		if(head_x >= 67){
 			head_x = 0;
@@ -109,46 +86,43 @@ var snakeGame = function(){
 		}
 
 
+		var tail = snake.pop(); // pops(removes) tail cell
+		tail.x = head_x;
+		tail.y = head_y;
+		snake.unshift(tail); // Puts tail cell at the head of the snake
+
+
+		//Telporting walls num test
+		// if(head_x >= 1000/cw || head_x <= -1 || head_y >= 600/cw || head_y <= -1) {
+		// 	console.log(head_y);
+		// }
+
+
+		
+
+		// //Teleporting walls
+		// if(head_x >= 67){
+		// 	head_x = 0;
+		// }
+		// else if(head_x <= -1){
+		// 	head_x = 67;
+		// }
+		// else if(head_y >= 40){
+		// 	head_y = 0;
+		// }
+		// else if(head_y <= -1){
+		// 	head_y = 40;
+		// }
+
+
 
 		for(var i = 0; i < snake.length; i++) {
 			var s = snake[i];
-				// ctx.fillStyle = "pink"; // Snake fill colour
-				// ctx.fillRect(s.x*cw, s.y*cw, cw, cw);
-				// // ctx.strokeStyle = "green"; // Snake border colour
-				// // ctx.strokeRect(s.x*cw, s.y*cw, cw, cw);
-			makeCell(s.x, s.y);
+				ctx.fillStyle = "pink"; // Snake fill colour
+				ctx.fillRect(s.x*cw, s.y*cw, cw, cw);
+				// ctx.strokeStyle = "green"; // Snake border colour
+				// ctx.strokeRect(s.x*cw, s.y*cw, cw, cw);
 		}
-
-		// Draw food
-		//makeCell(food.x, food.y); 
-	}
-
-
-
-	var makeCell = function(x, y) {
-		ctx.fillStyle = "pink"; // Snake fill colour
-		ctx.fillRect(x*cw, y*cw, cw, cw);
-		// ctx.strokeStyle = "green"; // Snake border colour
-		// ctx.strokeRect(s.x*cw, s.y*cw, cw, cw);
-	}
-
-
-
-
-/////////////////// WHY WHY WHY ????? /////////////////
-	var startGame = function() {
-	var dir = "right"
-	initSnake();
-	//createFood();
-	//drawSnake();
-
-	if (typeof game_loop != "undefined") clearInterval(game_loop);
-	game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
-
-	}
-
-	startGame();
-
 
 
 
@@ -165,9 +139,13 @@ var snakeGame = function(){
 
 		
 
+	}
+initSnake()
+drawSnake()
 
-
+	game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
 }
+
 
 snakeGame();
 
