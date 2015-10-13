@@ -19,24 +19,45 @@ var snakeGame = function(){
 
 	var snake; // Array to render snake
 
+	var foodBits = []; // Food Array
+
+
+	/////// Render Food ////////
+
+	var makeFood = function() {
+		var food = {
+			x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
+			y: Math.floor(Math.random() * h / cw)
+		}
+		// store in foodBits // push into array
+		foodBits.push(food);
+
+	}
+
+	var drawFood = function() {
+		// loop through foodBits // for loop
+			for(var i = 0; i < foodBits.length; i++) {
+			var f = foodBits[i];
+			ctx.fillStyle = "red"; // Snake fill colour
+			ctx.fillRect(f.x*cw, f.y*cw, cw, cw);
+			// ctx.strokeStyle = "green"; // Snake border colour
+			// ctx.strokeRect(s.x*cw, s.y*cw, cw, cw);
+		}
+	}
+
+	// function food collision
+	// loop to check for food and head collision
+		// another function to eat // remove food // call makeFood
+
+	///////////////////////////////////
 
 	// Score Counter
 	var player1 = 0;
 	var player2 = 0;
 
-	// var startGame = function() {
-	// 	var dir = "right"
-	// 	initSnake();
-	// 	createFood()
-	
-	// 	if (typeof game_loop != "undefined") clearInterval(game_loop);
-	// 	game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
-
-	// }
-
-	// startGame();
 
 
+ 	/// Render Snake///////////
 	var initSnake = function(){
 		var snakeLength = 6; // Starting length of snake. // Num of blocks
 		snake = [] //Empty array
@@ -44,10 +65,10 @@ var snakeGame = function(){
 			snake.push({x: i, y: 0}); // Initialises snake from top left of canvas
 		}
 	}
+	//////////////////////////////
 
 
-
-	// Draws the snake
+	// Draws the snake ///////////////
 	var drawSnake = function(){
 
 
@@ -71,6 +92,13 @@ var snakeGame = function(){
 		else if (dir == "up") head_y--;
 		else if (dir == "down") head_y++;
 
+		/////////////////////////////
+
+		//Telporting walls num test
+		// if(head_x >= 1000/cw || head_x <= -1 || head_y >= 600/cw || head_y <= -1) {
+		// 	console.log(head_y);
+		// }
+
 		//Teleporting walls
 		if(head_x >= 67){
 			head_x = 0;
@@ -85,6 +113,9 @@ var snakeGame = function(){
 			head_y = 40;
 		}
 
+		// 67 / cw
+		/////////////////////////
+
 
 		var tail = snake.pop(); // pops(removes) tail cell
 		tail.x = head_x;
@@ -92,27 +123,7 @@ var snakeGame = function(){
 		snake.unshift(tail); // Puts tail cell at the head of the snake
 
 
-		//Telporting walls num test
-		// if(head_x >= 1000/cw || head_x <= -1 || head_y >= 600/cw || head_y <= -1) {
-		// 	console.log(head_y);
-		// }
 
-
-		
-
-		// //Teleporting walls
-		// if(head_x >= 67){
-		// 	head_x = 0;
-		// }
-		// else if(head_x <= -1){
-		// 	head_x = 67;
-		// }
-		// else if(head_y >= 40){
-		// 	head_y = 0;
-		// }
-		// else if(head_y <= -1){
-		// 	head_y = 40;
-		// }
 
 
 
@@ -123,6 +134,16 @@ var snakeGame = function(){
 				// ctx.strokeStyle = "green"; // Snake border colour
 				// ctx.strokeRect(s.x*cw, s.y*cw, cw, cw);
 		}
+
+		drawFood()
+
+	////////////////////////////////////
+
+
+
+	// grow snake function
+
+	// increase speed function
 
 
 
@@ -140,11 +161,16 @@ var snakeGame = function(){
 		
 
 	}
-initSnake()
-drawSnake()
 
-	game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
+initSnake()
+// drawSnake()
+makeFood()
+// drawFood()
+
+game_loop = setInterval(drawSnake, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
+
 }
+
 
 
 snakeGame();
