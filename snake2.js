@@ -180,10 +180,12 @@ var snakeGame = function(){
 					x: head_x,
 					y: head_y
 				}
+				snake.unshift(tail);
 				foodBits.pop();
 				makeFood();
 				score++;
-				console.log(score)
+				console.log("Score " + score)
+				console.log("Snake length " + snake.length);
 			}
 
 			// Body collision
