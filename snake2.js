@@ -56,6 +56,7 @@ var snakeGame = function(){
 	///////////////////////////////////
 
 	// Score Counter
+	var score = 0;
 	var player1 = 0;
 	var player2 = 0;
 
@@ -126,7 +127,7 @@ var snakeGame = function(){
 		tail.y = head_y;
 		snake.unshift(tail); // Puts tail cell at the head of the snake
 
-		checkFoodCollision();
+		checkCollision();
 
 		for(var i = 0; i < snake.length; i++) {
 			var s = snake[i];
@@ -165,27 +166,32 @@ var snakeGame = function(){
 
 	// Food Collision
 
-	var checkFoodCollision = function() {
+	var checkCollision = function() {
 
 		var head_x = snake[0].x;
 		var head_y = snake[0].y;
 
+		// Food Collison
 		for(var i = 0; i < foodBits.length; i++) {
 			var f = foodBits[i];
 			if (head_x == f.x && head_y == f.y) {
-				console.log("eating")
+				//console.log("eating")
 				var tail = {
 					x: head_x,
 					y: head_y
 				}
+				foodBits.pop();
 				makeFood();
+				score++;
+				console.log(score)
 			}
 
+			// Body collision
 			else {
 				for(var j = 1; j < snake.length; j++) {
 				var s = snake[j];
 					if(head_x == s.x && head_y == s.y) {
-						console.log("Game Over")					
+						console.log("Game Over")			
 					}
 				}
 			}	
