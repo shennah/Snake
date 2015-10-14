@@ -55,7 +55,7 @@ var snakeGame = function(){
 				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
 				y: Math.floor(Math.random() * h / cw),
 				type: "regular",
-				colour: "green"
+				colour: "#45B29D"
 			}
 			// store in foodBits // push into array
 			foodBits.push(food);
@@ -67,14 +67,14 @@ var snakeGame = function(){
 				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
 				y: Math.floor(Math.random() * h / cw),
 				type: "speed",
-				colour: "orange"
+				colour: "#EFC94C"
 			}
 			// store in foodBits // push into array
 			foodBits.push(food);
 			var indexOfSpeed = foodBits.indexOf(food);
 			setTimeout(function() {
 				foodBits.splice(indexOfSpeed, 1);
-			}, 5000)
+			}, 10000)
 		}
 
 	}
@@ -98,10 +98,10 @@ var snakeGame = function(){
 
 	// fills background colour after snake tail pop // prevents trail 
 	var drawBackground = function() {
-		ctx.fillStyle = "white"; // canvas fill colour
-		ctx.fillRect(0, 0, 1000, 600);
-		ctx.strokeStyle = "black"; // canvas border colour
-		ctx.strokeRect(0, 0, 1000, 600);
+		ctx.fillStyle = "#334D5C"; // canvas fill colour
+		ctx.fillRect(0, 0, 1005, 600);
+		// ctx.strokeStyle = "black"; // canvas border colour
+		// ctx.strokeRect(0, 0, 1005, 600);
 	}
 
 	var updateSnake = function() {
@@ -118,7 +118,7 @@ var snakeGame = function(){
 
 
 		//Telporting walls num test
-		// if(head_x >= 1000/cw || head_x <= -1 || head_y >= 600/cw || head_y <= -1) {
+		// if(head_x >= 1005/cw || head_x <= -1 || head_y >= 600/cw || head_y <= -1) {
 		// 	console.log(head_y);
 		// }
 
@@ -149,7 +149,7 @@ var snakeGame = function(){
 		// draw snake cells
 		for(var i = 0; i < snake.length; i++) {
 			var s = snake[i];
-				ctx.fillStyle = "pink"; // Snake fill colour
+				ctx.fillStyle = "#DF5A49"; // Snake fill colour
 				ctx.fillRect(s.x*cw, s.y*cw, cw, cw);
 				// ctx.strokeStyle = "green"; // Snake border colour
 				// ctx.strokeRect(s.x*cw, s.y*cw, cw, cw);
@@ -197,6 +197,9 @@ var snakeGame = function(){
 					}
 					snake.push(tail);
 					foodBits.splice(i, 1);
+					i--;
+					score = score + 3;
+					console.log("Score " + score);
 
 					console.log("You got a speed food");
 
@@ -225,7 +228,9 @@ var snakeGame = function(){
 						// console.log(snake[0]);
 						// console.log(snake[snake.length-1])
 						// console.log(JSON.stringify(snake));
-						console.log("Game Over")			
+						console.log("Game Over")
+						gameOver();
+						snakeGame();			
 					}
 
 				}
@@ -259,6 +264,11 @@ var snakeGame = function(){
 		else if ((key === 39) && (dir != "left")) dir = "right";
 		else if ((key === 40) && (dir != "up")) dir = "down";
 	})
+
+	var gameOver = function() {
+		clearInterval(game_loop);
+		alert("You died")
+	}
 
 	game_loop = setInterval(mainLoop, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
 
