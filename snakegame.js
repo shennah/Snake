@@ -184,7 +184,7 @@ var snakeGame = function(){
 					snake.push(tail); // adds the new tail cell that's been created to the end of the array.
 					// This block above extends the tail.
 					foodBits.splice(i, 1); // This is what removes the food from the screen.
-					//i--; // dont skip next food bit
+					i--; // dont skip next food bit
 					makeFood();
 					score++;
 
