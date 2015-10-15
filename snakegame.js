@@ -63,7 +63,7 @@ var snakeGame = function(){
 		}
 
 		// speed food
-		if ((score + 1) % 3 === 0) {
+		if ((score + 1) % 9 === 0) {
 			var food = {
 				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
 				y: Math.floor(Math.random() * h / cw),
