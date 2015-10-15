@@ -204,6 +204,7 @@ var snakeGame = function(){
 					snake.push(tail);
 					foodBits.splice(i, 1);
 					i--;
+					makeFood()
 					score = score + 5;
 
 					$(document).ready(function(){
