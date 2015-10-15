@@ -51,7 +51,7 @@ var snakeGame = function(){
 	/////// Render Food ////////
 	var makeFood = function() {
 		if (!isRegularFood()) {
-			console.log("Time for some new food!");
+			//console.log("Time for some new food!");
 			var food = {
 				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
 				y: Math.floor(Math.random() * h / cw),
@@ -178,22 +178,25 @@ var snakeGame = function(){
 					var tail = {
 						// get the x and y position of the last cell in the snake array (the tail)
 						x: snake[snake.length-1].x, 
-						y: snake[snake.length-1].y
+						y: snake[snake.length-1].y,
 					}
 
 					snake.push(tail); // adds the new tail cell that's been created to the end of the array.
 					// This block above extends the tail.
+					
 					foodBits.splice(i, 1); // This is what removes the food from the screen.
 					i--; // dont skip next food bit
+					
 					makeFood();
+					
 					score++;
 
 					$(document).ready(function(){
 						$(".score").text(score);
 					});	
 
-					console.log("Score " + score)
-					console.log("Snake length " + snake.length);
+					//console.log("Score " + score)
+					// console.log("Snake length " + snake.length);
 				} 
 
 				else if (f.type === "speed") {
@@ -201,28 +204,32 @@ var snakeGame = function(){
 						x: snake[snake.length-1].x, 
 						y: snake[snake.length-1].y
 					}
+
 					snake.push(tail);
+
 					foodBits.splice(i, 1);
 					i--;
+
 					makeFood()
+
 					score = score + 5;
 
 					$(document).ready(function(){
 						$(".score").text(score);
 					});	
 
-					console.log("Score " + score);
+					// console.log("Score " + score);
 
-					console.log("You got a speed food");
+					//console.log("You got a speed food");
 
 					clearInterval(game_loop); // stop the currently running god method
 					game_loop = setInterval(mainLoop, 50); // restart the god method with 50ms intervals (so it goes twice as fast).
 					setTimeout(function() {
 						// after 10 seconds, stop the 2x speed and revert to the original speed.
-						console.log("Speed bonus ending");
+						//console.log("Speed bonus ending");
 						clearInterval(game_loop);
 						game_loop = setInterval(mainLoop, 80);
-						console.log(game_loop);
+						//console.log(game_loop);
 					}, 10000);
 				}
 			}
@@ -269,7 +276,9 @@ var snakeGame = function(){
 
 	// Keyboard Directions
 	$(document).keydown(function(e){
+
 		var key = e.which;
+		e.preventDefault();
 
 		if ((key === 37) && (dir != "right")) dir = "left";
 		else if ((key === 38) && (dir != "down")) dir = "up";
