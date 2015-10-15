@@ -279,7 +279,14 @@ var snakeGame = function(){
 
 	var gameOver = function() {
 		clearInterval(game_loop);
-		alert("You died")
+		// alert("You died")
+
+		swal ({
+			title: "You died", 
+			text: "Play again?",
+			type: "warning"
+		});
+
 		$(".highscore").text(score);
 		score = 0;
       		$('.score').text(score);
