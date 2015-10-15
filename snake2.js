@@ -20,6 +20,7 @@ var snakeGame = function(){
 	var snake; // Array to render snake
 	var foodBits = []; // Food Array
 
+
 	// Score Counter
 	var score = 0;
 	var player1 = 0;
@@ -62,7 +63,7 @@ var snakeGame = function(){
 		}
 
 		// speed food
-		if ((score + 1) % 10 === 0) {
+		if ((score + 1) % 9 === 0) {
 			var food = {
 				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
 				y: Math.floor(Math.random() * h / cw),
@@ -186,6 +187,11 @@ var snakeGame = function(){
 					i--; // dont skip next food bit
 					makeFood();
 					score++;
+
+					$(document).ready(function(){
+						$(".score").text(score);
+					});	
+
 					console.log("Score " + score)
 					console.log("Snake length " + snake.length);
 				} 
@@ -198,7 +204,12 @@ var snakeGame = function(){
 					snake.push(tail);
 					foodBits.splice(i, 1);
 					i--;
-					score = score + 3;
+					score = score + 5;
+
+					$(document).ready(function(){
+						$(".score").text(score);
+					});	
+
 					console.log("Score " + score);
 
 					console.log("You got a speed food");
@@ -234,7 +245,7 @@ var snakeGame = function(){
 					}
 
 				}
-			}	
+			}
 		}
 
 	} // food collision
@@ -265,15 +276,21 @@ var snakeGame = function(){
 		else if ((key === 40) && (dir != "up")) dir = "down";
 	})
 
+
 	var gameOver = function() {
 		clearInterval(game_loop);
 		alert("You died")
+		$(".highscore").text(score);
+		score = 0;
+      		$('.score').text(score);
 	}
+
 
 	game_loop = setInterval(mainLoop, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
 
 
 } // snakeGame()
+
 
 
 
