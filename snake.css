@@ -39,10 +39,11 @@ body {
 
 .instructions {
 	width: 250px;
-	float: right;
 	text-align: center;
 	margin-top: 100px;
 	color: #334D5C;
+	position: absolute;
+	margin-left: 1010px;
 }
 
 h1 {
