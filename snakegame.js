@@ -63,7 +63,7 @@ var snakeGame = function(){
 		}
 
 		// speed food
-		if ((score + 1) % 9 === 0) {
+		if ((score + 1) % 3 === 0) {
 			var food = {
 				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
 				y: Math.floor(Math.random() * h / cw),
@@ -184,7 +184,7 @@ var snakeGame = function(){
 					snake.push(tail); // adds the new tail cell that's been created to the end of the array.
 					// This block above extends the tail.
 					foodBits.splice(i, 1); // This is what removes the food from the screen.
-					i--; // dont skip next food bit
+					//i--; // dont skip next food bit
 					makeFood();
 					score++;
 
@@ -220,7 +220,7 @@ var snakeGame = function(){
 						// after 10 seconds, stop the 2x speed and revert to the original speed.
 						console.log("Speed bonus ending");
 						clearInterval(game_loop);
-						game_loop = setInterval(mainLoop, 100);
+						game_loop = setInterval(mainLoop, 80);
 						console.log(game_loop);
 					}, 10000);
 				}
@@ -293,7 +293,7 @@ var snakeGame = function(){
 	}
 
 
-	game_loop = setInterval(mainLoop, 100); // Sets starting speed // timer to trigger drawSnake function every 100ms
+	game_loop = setInterval(mainLoop, 80); // Sets starting speed // timer to trigger drawSnake function every 100ms
 
 
 } // snakeGame()
