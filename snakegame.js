@@ -23,8 +23,8 @@ var snakeGame = function(){
 
 	// Score Counter
 	var score = 0;
-	var player1 = 0;
-	var player2 = 0;
+	//var player1 = 0;
+	//var player2 = 0;
 
 
 
@@ -53,7 +53,7 @@ var snakeGame = function(){
 		if (!isRegularFood()) {
 			//console.log("Time for some new food!");
 			var food = {
-				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas minus 1 cw
+				x: Math.floor(Math.random() * w / cw), // spawns food in length/width of canvas 
 				y: Math.floor(Math.random() * h / cw),
 				type: "regular",
 				colour: "#45B29D"
@@ -276,15 +276,30 @@ var snakeGame = function(){
 
 	// Keyboard Directions
 	$(document).keydown(function(e){
-
+		e.preventDefault(); 
 		var key = e.which;
-		e.preventDefault();
-
 		if ((key === 37) && (dir != "right")) dir = "left";
 		else if ((key === 38) && (dir != "down")) dir = "up";
 		else if ((key === 39) && (dir != "left")) dir = "right";
 		else if ((key === 40) && (dir != "up")) dir = "down";
-	})
+	});
+
+// MOBILE EVENTS
+	$(document).on("swipeleft", function(e){
+		(dir != "right")) dir = "left";
+	});
+
+	$(document).on("swiperight", function(e){
+		(dir != "left")) dir = "right";
+	});
+
+	$(document).on("swipeup", function(e){
+		(dir != "down")) dir = "up";
+	});
+
+	$(document).on("swipedown", function(e){
+		(dir != "up")) dir = "down";
+	});	
 
 
 	var gameOver = function() {
@@ -293,7 +308,7 @@ var snakeGame = function(){
 
 		swal ({
 			title: "You died", 
-			text: "Play again?",
+			text: "Play again",
 			type: "warning"
 		});
 
