@@ -285,21 +285,21 @@ var snakeGame = function(){
 	});
 
 // MOBILE EVENTS
-	$(document).on("swipeleft", function(e){
-		(dir != "right")) dir = "left";
-	});
+	// $(document).on("swipeleft", function(e){
+	// 	(dir != "right") dir = "left";
+	// });
 
-	$(document).on("swiperight", function(e){
-		(dir != "left")) dir = "right";
-	});
+	// $(document).on("swiperight", function(e){
+	// 	(dir != "left") dir = "right";
+	// });
 
-	$(document).on("swipeup", function(e){
-		(dir != "down")) dir = "up";
-	});
+	// $(document).on("swipeup", function(e){
+	// 	(dir != "down") dir = "up";
+	// });
 
-	$(document).on("swipedown", function(e){
-		(dir != "up")) dir = "down";
-	});	
+	// $(document).on("swipedown", function(e){
+	// 	(dir != "up") dir = "down";
+	// });	
 
 
 	var gameOver = function() {
