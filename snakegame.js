@@ -1,7 +1,4 @@
 
-
-
-
 var snakeGame = function(){
 
 	// Canvas
@@ -12,32 +9,26 @@ var snakeGame = function(){
 	// console.log(w);
 	// console.log(h)
 
-
 	var cw = 15; // Cell width
 	var dir = "right"// default starting direction
-
 
 	var snake; // Array to render snake
 	var foodBits = []; // Food Array
 
-
 	// Score Counter
 	var score = 0;
-	//var player1 = 0;
-	//var player2 = 0;
-
-
 
  	/// Render Snake///////////
 	var initSnake = function(){
 		var snakeLength = 6; // Starting length of snake. // Num of blocks
-		snake = [] //Empty array
+		snake = [];
 		for(var i = snakeLength - 1; i >= 0; i--) {
 			snake.push({x: i, y: 0}); // Initialises snake from top left of canvas
 		}
 	}
-	//////////////////////////////
 
+
+	/// Check Food Type ///////////
 	var isRegularFood = function() {
 		for(var i = 0; i < foodBits.length; i++) {
 			var f = foodBits[i];
@@ -157,12 +148,8 @@ var snakeGame = function(){
 		}		
 	}
 
-	// ///////////////
 
-
-
-	// Food Collision
-
+	// Food Collision ////
 	var checkCollision = function() {
 
 		var head_x = snake[0].x;
